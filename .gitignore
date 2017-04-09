@@ -1,3 +1,4 @@
 *.pyc
 blog/blog/blog_settings.py
 blog/mydatabase
+blog/log
