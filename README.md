@@ -5,6 +5,7 @@ http://www.yuqiaochuang.com:8080/
 3. bootstrap
 4. treeview
 5. leanote的markdown模块
+6. 视频外链用的B站分享接口
 
 以上模块都已经在库中，不用单独下载。
 ## 运行
