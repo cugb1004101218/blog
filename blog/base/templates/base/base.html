@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>雨敲窗的博客</title>
+
+    <!-- Bootstrap core CSS -->
+    {% load static %}
+    <link href='{% static "bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
+    <link href='{% static "highlight.js/src/styles/default.css" %}' rel="stylesheet">
+    <style type="text/css">
+    .jumbotron img{width:100%}
+    </style>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">雨敲窗的博客</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            {% for category in all_category %}
+              <ul class="nav navbar-nav">
+                  <li><a href="/article?category={{category.literal}}" {%ifequal category.literal now_category.literal %}class="active"{% endifequal%}>{{category.literal}}</a></li>
+              </ul>
+            {% endfor %}
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+      {% block content %}{% endblock %}
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static "jquery-3.2.0.min.js" %}"></script>
+    <script>window.jQuery</script>
+    <link href='{% static "markdown/prettify.css" %}' type="text/css" rel="stylesheet"/>
+    <script src="http://leanote.com/js/google-code-prettify/prettify.js"></script>
+    <script src='{% static "markdown/prettify.js" %}'></script>
+    <script>
+      $("pre").addClass("prettyprint linenums");
+      prettyPrint();
+    </script>
+
+    <script src='{% static "bootstrap/js/bootstrap.min.js" %}'></script>
+    <script src='{% static "bootstrap/js/bootstrap-treeview.min.js" %}'></script>
+    <script src='{% static "markdown/Markdown.Converter.js" %}'></script>
+    <script src='{% static "markdown/Markdown.Sanitizer.js" %}'></script>
+    <script src='{% static "markdown/Markdown.Editor.js" %}'></script>
+    <script src='{% static "markdown/Markdown.local.zh.js" %}'></script>
+    <script src='{% static "markdown/Markdown.Extra.js" %}'></script>
+    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]], processEscapes: true },  messageStyle: "none"});
+    </script>
+    {% block script %}{% endblock %}
+  </body>
+</html>
+

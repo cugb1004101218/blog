@@ -1,0 +1,79 @@
+{% extends "base/base.html" %}
+{% block content %}
+{% load static %}
+<div class="row">
+  <div class="col-md-3">
+    <div class="jumbotron" style="padding: 10px">
+      <div id="tree" style="width:100%"></div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="jumbotron">
+      <h1>{{ article.title }}</h1>
+      {% ifnotequal article.video_url "" %}
+      <embed height="415" width="544" quality="veryhigh" allowfullscreen="true" type="application/x-shockwave-flash" src="//static.hdslb.com/miniloader.swf" flashvars="{{article.video_url}}" pluginspage="//www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash"></embed>
+      {% endifnotequal %}
+      <div class="desc" id="content">
+        <div id="markdownContent" style="display: none">
+          <textarea>{{ article.content }}</textarea>
+        </div>
+      </div>
+      <p>
+      </p>
+      <div class="row">
+        <div class="col-md-2">
+          <p>
+            <a class="btn btn-lg btn-primary" href="/article?article_id={{pre_article_id}}" role="button">上一篇</a>
+          </p>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+          <p>
+            <a class="btn btn-lg btn-primary" href="/article?article_id={{next_article_id}}" role="button">下一篇</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block script %}
+  <script>
+    var content = $.trim($("#markdownContent textarea").val());
+    var converter = Markdown.getSanitizingConverter();
+    Markdown.Extra.init(converter, {extensions: ["tables", "fenced_code_gfm", "def_list"]});
+    var html = converter.makeHtml(content);
+    $("#content").html(html);
+    $("pre").addClass("prettyprint linenums");
+    prettyPrint();
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"wmd-preview"]);
+    
+  </script>
+  <script>
+    function getTree() {
+      // Some logic to retrieve, or generate tree structure
+      var data = [
+        {% for a in article_list %}
+          {
+            text: "{{a.title}}",
+            href: "/article?article_id={{a.article_id}}&category={{now_category.literal}}",
+            {% ifequal a.article_id article.article_id %}
+              state: {
+                selected: true
+              },
+            {% endifequal %}
+          },
+        {% endfor %}
+      ];
+      return data;
+    }
+    $('#tree').treeview({data: getTree(), showBorder: true, enableLinks: false, showIcon: false});
+    $('#tree').treeview('expandAll', { levels: 2, silent: true });
+    $('#tree').on('nodeSelected', function(event, data) {
+      window.location.href=data.href;
+    });
+  </script>
+{% endblock %}
