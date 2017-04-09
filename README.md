@@ -8,7 +8,7 @@ http://www.yuqiaochuang.com:8080/
 
 以上模块都已经在库中，不用单独下载。
 ## 运行
-1. 先进入虚环境
+1. 先进入虚环境<br>
 ```source blog_env/bin/activate```
-2. 开整
+2. 开整<br>
 ```python runserver 0.0.0.0:8000```
