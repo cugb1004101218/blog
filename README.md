@@ -13,3 +13,7 @@ http://www.yuqiaochuang.com:8080/
 ```source blog_env/bin/activate```
 2. 开整<br>
 ```python runserver 0.0.0.0:8000```
+
+## 写博客
+1. 在django admin管理后台直接写，content只支持markdown语法。
+2. 每个文章有且只有一个category。
