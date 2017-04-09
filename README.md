@@ -16,4 +16,5 @@ http://www.yuqiaochuang.com:8080/
 
 ## 写博客
 1. 在django admin管理后台直接写，content只支持markdown语法。
+2. 每个category都会在导航栏依次出现作为nav
 2. 每个文章有且只有一个category。
