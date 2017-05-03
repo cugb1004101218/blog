@@ -1,5 +1,5 @@
 ## demo
-http://www.yuqiaochuang.com:8080/
+http://www.yuqiaochuang.com
 1. python3.5
 2. django
 3. bootstrap
